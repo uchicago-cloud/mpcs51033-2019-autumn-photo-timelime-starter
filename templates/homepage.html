@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>Photo Timeline</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Photo Timeline</h1>
+    
+    <!-- image upload form -->
+    <div style="background-color: gray; border-width: 10px;">
+        <form action="upload_photo" method="POST" enctype="multipart/form-data">
+          Upload File: <input type="file" name="file"><br>
+        <input type="submit" name="submit" value="Submit">
+        </form>
+    </div>
+
+    <!-- photo timeline -->
+    <div>
+    
+    {% for image_entity in image_entities %}
+    <div style="width: 200px; float:left; height:200px; margin:10px">
+        <img src="{{image_entity['image_public_url']}}" width="200" height="200">
+    </div>
+    <div style="width: 100px; float:left; height:100px; margin:10px">
+      <p>{{image_entity['blob_name']}}</p>
+      <p>{{image_entity['timestamp']}}</p>
+    </div>
+    {% endfor %}
+    
+    </div>
+
+  </body>
+
+</html> 
